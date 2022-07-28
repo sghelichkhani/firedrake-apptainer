@@ -1,0 +1,12 @@
+--- firedrake-install  2022-07-28 15:30:41.549159868 +1000
++++ firedrake-install  2022-07-28 16:58:44.048993182 +1000
+@@ -652,8 +652,7 @@
+         if osname == "Darwin":
+             petsc_options.add("--CFLAGS=-Wno-implicit-function-declaration")
+     elif options.get("with_blas") is not None:
+-        petsc_options.add("--with-blaslapack-dir={}".format(options["with_blas"]))
+-        petsc_options.add("--LDFLAGS=-Wl,-rpath,{0}/lib -L{0}/lib".format(options["with_blas"]))
++        petsc_options.add("--with-blaslapack-lib=-L{}/lib/intel64 -lmkl_rt -Wl,--no-as-needed -lpthread -lm -ldl".format(options["with_blas"]))
+         if osname == "Darwin":
+             petsc_options.add("--CFLAGS=-I{}/include -Wno-implicit-function-declaration".format(options["with_blas"]))
+         else:

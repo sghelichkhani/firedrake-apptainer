@@ -1,0 +1,11 @@
+Bootstrap: localimage
+From: ompi-mkl.sif
+
+%files
+    files/mkl-in-upstream.patch /opt/mkl-in-upstream.patch
+
+%post
+    cd /opt && curl -O https://raw.githubusercontent.com/firedrakeproject/firedrake/master/scripts/firedrake-install
+    patch -p0 < mkl-in-upstream.patch
+    source /opt/intel/oneapi/setvars.sh
+    python3 firedrake-install --no-package-manager --disable-ssh --mpiexec=mpiexec --mpicc=mpicc --mpif90=mpif90 --mpicxx=mpicxx --with-blas=$MKLROOT
