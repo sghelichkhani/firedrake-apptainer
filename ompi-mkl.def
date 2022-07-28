@@ -1,0 +1,20 @@
+Bootstrap: docker
+From: rockylinux:8.6
+
+%environment
+    export OMPI_DIR=/opt/ompi
+    export PATH="$OMPI_DIR/bin:$PATH"
+    export LD_LIBRARY_PATH="$OMPI_DIR/lib:$LD_LIBRARY_PATH"
+
+%files
+    files/oneAPI.repo /etc/yum.repos.d/oneAPI.repo
+
+%post
+    rpm --import https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+    dnf install -y 'dnf-command(config-manager)'
+    dnf config-manager --set-enabled powertools
+    dnf install -y bzip2 perl gcc gcc-c++ gcc-gfortran python39 python39-devel git diffutils flex bison cmake zlib-devel autoconf automake libtool which procps-ng intel-oneapi-mkl-devel
+    export OMPI_DIR=/opt/ompi
+    export OMPI_VERSION=4.1.2
+    cd /opt && tar xf /mnt/files/openmpi-$OMPI_VERSION.tar.bz2
+    cd openmpi-$OMPI_VERSION && ./configure --prefix=$OMPI_DIR --without-pmi --without-cray-pmi --without-flux-pmi --without-slurm --without-moab --without-sge --enable-mpi1-compatibility && make -j install
