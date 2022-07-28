@@ -1,0 +1,18 @@
+[repos]
+firedrake = "https://github.com/firedrakeproject/firedrake.git#master"
+ufl = "https://github.com/firedrakeproject/ufl.git#master"
+fiat = "https://github.com/firedrakeproject/fiat.git#master"
+FInAT = "https://github.com/FInAT/FInAT.git#master"
+tsfc = "https://github.com/firedrakeproject/tsfc.git#master"
+PyOP2 = "https://github.com/OP2/PyOP2.git#master"
+pyadjoint = "https://github.com/dolfin-adjoint/pyadjoint.git#master"
+petsc = "https://github.com/firedrakeproject/petsc.git#firedrake"
+COFFEE = "https://github.com/coneoproject/COFFEE.git#master"
+loopy = "https://github.com/firedrakeproject/loopy.git#main"
+h5py = "https://github.com/firedrakeproject/h5py.git#firedrake"
+libsupermesh = "https://bitbucket.org/libsupermesh/libsupermesh.git#master"
+libspatialindex = "https://github.com/firedrakeproject/libspatialindex.git#master"
+
+[archives]
+"eigen-3.3.3.tar.gz" = "https://github.com/eigenteam/eigen-git-mirror/archive/3.3.3.tar.gz"
+"openmpi-4.1.2.tar.bz2" = "https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.2.tar.bz2"

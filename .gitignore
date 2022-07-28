@@ -1,0 +1,4 @@
+deps/
+env/
+files/*.tar.gz
+files/*.tar.bz2
