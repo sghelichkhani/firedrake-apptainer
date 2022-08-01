@@ -1,0 +1,16 @@
+Bootstrap: localimage
+From: containers/ompi-mkl.sif
+
+%environment
+    export OMPI_DIR=/opt/ompi
+    export PATH="$OMPI_DIR/bin:$PATH"
+    export LD_LIBRARY_PATH="$OMPI_DIR/lib:$LD_LIBRARY_PATH"
+    export PETSC_DIR=/opt/petsc
+    export PETSC_ARCH=arch-linux-c-opt
+
+%post
+    cd /opt && git clone /mnt/deps/petsc
+    source /opt/intel/oneapi/setvars.sh
+    cd petsc
+    python3 configure --with-fortran-bindings=0 --with-mpiexec=mpiexec --with-cc=mpicc --with-cxx-dialect=C++11 --with-c2html=0 --with-fc=mpif90 --with-blaslapack-lib="-L${MKLROOT}/lib/intel64 -lmkl_rt -Wl,--no-as-needed -lpthread -lm -ldl" --with-zlib --with-shared-libraries=1 --with-cxx=mpicxx --with-debugging=0 $flags
+    make PETSC_DIR=/opt/petsc PETSC_ARCH=arch-linux-c-opt all

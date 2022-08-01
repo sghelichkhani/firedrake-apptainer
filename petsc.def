@@ -1,9 +1,0 @@
-Bootstrap: localimage
-From: containers/ompi-mkl.sif
-
-%post
-    cd /opt && git clone /mnt/deps/petsc
-    source /opt/intel/oneapi/setvars.sh
-    cd petsc
-    python3 configure --with-fortran-bindings=0 --with-mpiexec=mpiexec --download-mumps --with-cc=mpicc --download-metis --download-scalapack --with-cxx-dialect=C++11 --download-pnetcdf --download-hwloc --download-chaco --with-c2html=0 --with-fc=mpif90 --with-blaslapack-dir=/opt/intel/oneapi/mkl/2022.1.0 --download-ptscotch --download-superlu_dist --with-zlib --download-suitesparse --download-hdf5 --download-netcdf --with-shared-libraries=1 --with-cxx=mpicxx --download-hypre --download-ml --download-pastix --with-debugging=0 --download-eigen=/mnt/files/eigen-3.3.3.tar.gz
-    make PETSC_DIR=/opt/petsc PETSC_ARCH=arch-linux-c-opt all
