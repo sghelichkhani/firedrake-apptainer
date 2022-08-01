@@ -41,23 +41,23 @@ def update_repos(repos):
     deps_path.mkdir(exist_ok=True)
 
     with tqdm(repos.items()) as t:
-        for repo, url in t:
+        for repo, repo_block in t:
             repo_path = deps_path / repo
 
-            if repo_path.exists():
-                t.set_description(f"updating {repo}")
-                print()
-                r = Repo(repo_path)
-                r.remotes.origin.fetch(progress=ProgressPrinter())
-            else:
+            if not repo_path.exists():
                 t.set_description(f"checking out {repo}")
                 print()
                 Repo.clone_from(
-                    url.split("#")[0],
+                    repo_block["git-url"],
                     deps_path / repo,
                     progress=ProgressPrinter(),
                     bare=True,
                 )
+            elif repo_path.exists() and "branch" in repo_block:
+                t.set_description(f"updating {repo}")
+                print()
+                r = Repo(repo_path)
+                r.remotes.origin.fetch(repo_block["branch"], progress=ProgressPrinter())
 
 
 def download_archives(archives):
@@ -136,13 +136,13 @@ if __name__ == "__main__":
         # or everything available through git
         if args.prefer_archives:
             repos = {
-                package: locations["git-url"]
+                package: locations
                 for package, locations in config["petsc"].items()
                 if "archive" not in locations
             }
         else:
             repos = {
-                package: locations["git-url"]
+                package: locations
                 for package, locations in config["petsc"].items()
                 if "git-url" in locations
             }

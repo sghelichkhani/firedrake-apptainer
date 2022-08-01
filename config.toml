@@ -1,59 +1,68 @@
 [repos]
-firedrake = "https://github.com/firedrakeproject/firedrake.git#master"
-ufl = "https://github.com/firedrakeproject/ufl.git#master"
-fiat = "https://github.com/firedrakeproject/fiat.git#master"
-FInAT = "https://github.com/FInAT/FInAT.git#master"
-tsfc = "https://github.com/firedrakeproject/tsfc.git#master"
-PyOP2 = "https://github.com/OP2/PyOP2.git#master"
-pyadjoint = "https://github.com/dolfin-adjoint/pyadjoint.git#master"
-petsc = "https://github.com/firedrakeproject/petsc.git#firedrake"
-COFFEE = "https://github.com/coneoproject/COFFEE.git#master"
-loopy = "https://github.com/firedrakeproject/loopy.git#main"
-h5py = "https://github.com/firedrakeproject/h5py.git#firedrake"
-libsupermesh = "https://bitbucket.org/libsupermesh/libsupermesh.git#master"
-libspatialindex = "https://github.com/firedrakeproject/libspatialindex.git#master"
+firedrake = { git-url = "https://github.com/firedrakeproject/firedrake.git", branch = "master" }
+ufl = { git-url = "https://github.com/firedrakeproject/ufl.git", branch = "master" }
+fiat = { git-url = "https://github.com/firedrakeproject/fiat.git", branch = "master" }
+FInAT = { git-url = "https://github.com/FInAT/FInAT.git", branch = "master" }
+tsfc = { git-url = "https://github.com/firedrakeproject/tsfc.git", branch = "master" }
+PyOP2 = { git-url = "https://github.com/OP2/PyOP2.git", branch = "master" }
+pyadjoint = { git-url = "https://github.com/dolfin-adjoint/pyadjoint.git", branch = "master" }
+petsc = { git-url = "https://github.com/firedrakeproject/petsc.git", branch = "firedrake" }
+COFFEE = { git-url = "https://github.com/coneoproject/COFFEE.git", branch = "master" }
+loopy = { git-url = "https://github.com/firedrakeproject/loopy.git", branch = "main" }
+h5py = { git-url = "https://github.com/firedrakeproject/h5py.git", branch = "firedrake" }
+libsupermesh = { git-url = "https://bitbucket.org/libsupermesh/libsupermesh.git", branch = "master" }
+libspatialindex = { git-url = "https://github.com/firedrakeproject/libspatialindex.git", branch = "master" }
 
-[archives.eigen]
-archive = "eigen-3.3.3.tar.gz"
-url = "https://github.com/eigenteam/eigen-git-mirror/archive/3.3.3.tar.gz"
 [archives.openmpi]
 archive = "openmpi-4.1.2.tar.bz2"
 url = "https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.2.tar.bz2"
 
+[petsc.eigen]
+archive = "eigen-3.3.3.tar.gz"
+url = "https://github.com/eigenteam/eigen-git-mirror/archive/3.3.3.tar.gz"
 [petsc.hypre]
-git-url = "https://github.com/hypre-space/hypre.git#v2.25.0"
+git-url = "https://github.com/hypre-space/hypre.git"
+commit = "v2.25.0"
 archive = "hypre-2.25.0.tar.gz"
 url = "https://github.com/hypre-space/hypre/archive/v2.25.0.tar.gz"
-[petsc.SuiteSparse]
-git-url = "https://github.com/DrTimothyAldenDavis/SuiteSparse.git#v5.12.0"
+[petsc.suitesparse]
+git-url = "https://github.com/DrTimothyAldenDavis/SuiteSparse.git"
+commit = "v5.12.0"
 archive = "SuiteSparse-5.12.0.tar.gz"
 url = "https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/v5.12.0.tar.gz"
 [petsc.scalapack]
-git-url = "https://github.com/Reference-ScaLAPACK/scalapack#5bad7487f496c811192334640ce4d3fc5f88144b"
+git-url = "https://github.com/Reference-ScaLAPACK/scalapack"
+commit = "5bad7487f496c811192334640ce4d3fc5f88144b"
 archive = "scalapack-5bad748.tar.gz"
 url = "https://github.com/Reference-ScaLAPACK/scalapack/archive/5bad7487f496c811192334640ce4d3fc5f88144b.tar.gz"
 [petsc.superlu_dist]
-git-url = "https://github.com/xiaoyeli/superlu_dist.git#a841c9be1666056b2a6b720d27161aa244b562b1"
+git-url = "https://github.com/xiaoyeli/superlu_dist.git"
+commit = "a841c9be1666056b2a6b720d27161aa244b562b1"
 archive = "superlu_dist-a841c9b.tar.gz"
 url = "https://github.com/xiaoyeli/superlu_dist/archive/a841c9be1666056b2a6b720d27161aa244b562b1.tar.gz"
-[petsc.trilinos-ml]
-git-url = "https://gitlab.com/petsc/pkg-trilinos-ml.git#v13.2.0"
+[petsc.ml]
+git-url = "https://gitlab.com/petsc/pkg-trilinos-ml.git"
+commit = "v13.2.0"
 archive = "trilinos-ml-13.2.0.tar.gz"
 url = "https://gitlab.com/petsc/pkg-trilinos-ml/-/archive/v13.2.0/pkg-trilinos-ml-v13.2.0.tar.gz"
-[petsc.scotch]
-git-url = "https://gitlab.inria.fr/scotch/scotch.git#v7.0.1"
+[petsc.ptscotch]
+git-url = "https://gitlab.inria.fr/scotch/scotch.git"
+commit = "v7.0.1"
 archive = "scotch-7.0.1.tar.gz"
 url = "https://gitlab.inria.fr/scotch/scotch/-/archive/v7.0.1/scotch-v7.0.1.tar.gz"
 [petsc.pnetcdf]
-git-url = "https://github.com/parallel-netcdf/pnetcdf.git#checkpoint.1.12.2"
+git-url = "https://github.com/parallel-netcdf/pnetcdf.git"
+commit = "checkpoint.1.12.2"
 archive = "pnetcdf-1.12.2.tar.gz"
 url = "https://parallel-netcdf.github.io/Release/pnetcdf-1.12.2.tar.gz"
 [petsc.metis]
-git-url = "https://bitbucket.org/petsc/pkg-metis.git#v5.1.0-p10"
+git-url = "https://bitbucket.org/petsc/pkg-metis.git"
+commit = "v5.1.0-p10"
 archive = "metis-5.1.0-p10.tar.gz"
 url = "https://bitbucket.org/petsc/pkg-metis/get/v5.1.0-p10.tar.gz"
 [petsc.chaco]
-git-url = "https://bitbucket.org/petsc/pkg-chaco.git#v2.2-p4"
+git-url = "https://bitbucket.org/petsc/pkg-chaco.git"
+commit = "v2.2-p4"
 archive = "chaco-2.2-p4.tar.gz"
 url = "https://bitbucket.org/petsc/pkg-chaco/get/v2.2-p4.tar.gz"
 [petsc.hwloc]
