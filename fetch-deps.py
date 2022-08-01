@@ -84,6 +84,8 @@ if __name__ == "__main__":
     with open("config.toml", "rb") as f:
         config = tomli.load(f)
 
+    available_components = ["firedrake", "petsc"]
+
     parser = argparse.ArgumentParser(
         description="Fetch Firedrake Apptainer dependencies",
         epilog="With no arguments, downloads git and archive dependencies for Firedrake",
@@ -104,12 +106,25 @@ if __name__ == "__main__":
         help="Prefer tarball archives to git repositories, for PETSc dependencies",
     )
     parser.add_argument(
+        "-a",
+        "--all",
+        action="store_true",
+        dest="all_components",
+        help="Download all available components",
+    )
+    parser.add_argument(
         "components",
         nargs="*",
-        choices=[[], "firedrake", "petsc"],
+        choices=available_components + [[]],
         help="Components of which to download dependencies",
     )
     args = parser.parse_args()
+
+    selected_components = args.components
+    if args.all_components:
+        selected_components = available_components
+    elif not selected_components:
+        selected_components = ["firedrake"]
 
     if args.only:
         only_list = [dep.lower() for dep in args.only.split(",")]
