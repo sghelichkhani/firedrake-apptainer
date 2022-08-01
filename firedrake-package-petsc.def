@@ -1,0 +1,30 @@
+Bootstrap: localimage
+From: containers/firedrake-petsc.sif
+Stage: build
+
+Bootstrap: docker
+From: rockylinux:8.6
+Stage: final
+
+%environment
+    export OMPI_DIR=/opt/ompi
+    export PATH="$OMPI_DIR/bin:$PATH"
+    export LD_LIBRARY_PATH="$OMPI_DIR/lib:$LD_LIBRARY_PATH"
+    export PETSC_DIR=/opt/petsc
+    export PETSC_ARCH=arch-linux-c-opt
+
+%post
+    dnf install -y python39 procps-ng gcc gcc-gfortran git libnl3-devel numactl-devel
+
+%runscript
+    source /opt/intel/oneapi/setvars.sh "" > /dev/null
+    source /opt/firedrake/bin/activate
+    export PYOP2_CACHE_DIR=${PBS_JOBFS:-${TMPDIR:-/tmp}}/pyop2
+    export FIREDRAKE_TSFC_KERNEL_CACHE_DIR=${PBS_JOBFS:-${TMPDIR:-/tmp}}/tsfc
+    export LD_LIBRARY_PATH=/opt/ompi/lib/GNU:$LD_LIBRARY_PATH
+    exec python $@
+
+%files from build
+    /opt/firedrake
+    /opt/ompi
+    /opt/petsc

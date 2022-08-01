@@ -12,4 +12,4 @@ From: containers/petsc.sif
     export PETSC_DIR=/opt/petsc
     export PETSC_ARCH=arch-linux-c-opt
 
-    cd /opt && python3 firedrake-install --no-package-manager --mpiexec=mpiexec --mpicc=mpicc --mpif90=mpif90 --mpicxx=mpicxx --honour-petsc-dir
+    cd /opt && python3 firedrake-install --no-package-manager --mpiexec=mpiexec --mpicc=mpicc --mpif90=mpif90 --mpicxx=mpicxx --honour-petsc-dir --pip-install scipy --pip-install assess
