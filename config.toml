@@ -20,6 +20,7 @@ url = "https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.2.tar.bz2
 [petsc.eigen]
 archive = "eigen-3.3.3.tar.gz"
 url = "https://github.com/eigenteam/eigen-git-mirror/archive/3.3.3.tar.gz"
+upstream-allowed = false
 [petsc.hypre]
 git-url = "https://github.com/hypre-space/hypre.git"
 commit = "v2.25.0"

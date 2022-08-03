@@ -1,3 +1,4 @@
+import argparse
 from pathlib import Path
 from string import Template
 import tomli
@@ -5,6 +6,7 @@ import tomli
 bind_path = Path("/mnt")
 deps_path = Path("deps")
 files_path = Path("files")
+
 
 def fetch_path(name, config):
     git_path = deps_path / name
@@ -18,15 +20,29 @@ def fetch_path(name, config):
     raise Exception(f"dependency for {name} not found")
 
 
-def generate_flag(name, path):
+def generate_flag(name, block, upstream=False):
+    if upstream and block.get("upstream-allowed", True):
+        return f"--download-{name}"
+
+    path = fetch_path(name, block)
     return f"--download-{name}={path}"
+
 
 if __name__ == "__main__":
     with open("config.toml", "rb") as f:
         config = tomli.load(f)
 
-    args = " ".join(
-        generate_flag(name, fetch_path(name, block))
+    parser = argparse.ArgumentParser(description="Generate PETSc build definition file")
+    parser.add_argument(
+        "-u",
+        "--upstream",
+        action="store_true",
+        help="Download all dependencies from upstream",
+    )
+    args = parser.parse_args()
+
+    flags = " ".join(
+        generate_flag(name, block, upstream=args.upstream)
         for name, block in config["petsc"].items()
     )
 
@@ -34,4 +50,4 @@ if __name__ == "__main__":
         template = Template(f.read())
 
     with open("petsc.def", "w") as f:
-        f.write(template.safe_substitute(flags=args))
+        f.write(template.safe_substitute(flags=flags))
