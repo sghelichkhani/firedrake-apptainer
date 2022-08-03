@@ -1,0 +1,13 @@
+Bootstrap: localimage
+From: containers/petsc.sif
+
+%post
+    export OMPI_DIR=/opt/ompi
+    export PATH="$OMPI_DIR/bin:$PATH"
+    export LD_LIBRARY_PATH="$OMPI_DIR/lib:$LD_LIBRARY_PATH"
+    source /opt/intel/oneapi/setvars.sh
+    export PETSC_DIR=/opt/petsc
+    export PETSC_ARCH=arch-linux-c-opt
+
+    cd /opt && curl -O https://raw.githubusercontent.com/firedrakeproject/firedrake/master/scripts/firedrake-install
+    firedrake-install --no-package-manager --mpiexec=mpiexec --mpicc=mpicc --mpif90=mpif90 --mpicxx=mpicxx --honour-petsc-dir --pip-install scipy --pip-install assess
