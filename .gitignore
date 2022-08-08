@@ -3,4 +3,6 @@ env/
 files/*.tar.gz
 files/*.tar.bz2
 
+*sif
+
 petsc.def
